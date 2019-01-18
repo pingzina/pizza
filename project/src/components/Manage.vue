@@ -1,13 +1,46 @@
 <template>
   <div class="manage">
-    <p>manage</p>
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        <newPizza></newPizza>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <h3 class="text-muted my-5">菜单</h3>
+        <table class="table">
+          <thead class="table table-default">
+          <tr>
+            <th>品种</th>
+            <th>删除</th>
+          </tr>
+          </thead>
+
+          <tbody class="table table-default">
+          <tr>
+            <td>榴莲pizza</td>
+            <td>
+              <button class="btn btn-outline-danger btn-sm">
+                &times;
+               </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
   </div>
 </template>
 <script>
+  //引入菜单管理组件
+  import newPizza from './NewPizza'
   export default {
     name: "manage",
     data() {
       return {}
+    },
+    components:{
+      "newPizza":newPizza
     },
 //    //实现组件内的守卫
 //   beforeRouteEnter:(to, from, next)=> {
@@ -32,7 +65,6 @@
 //        next(false);
 //    }
 //   },
-    components: {},
     methods: {},
   };
 </script>
