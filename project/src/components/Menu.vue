@@ -115,7 +115,7 @@
         //添加过滤，解决重复添加数据。
         if(this.foodList.length>0){
          let result=this.foodList.filter((result)=>{
-            return (foodShow.name===item.name && foodShow.price===options.price)
+            return (result.name===item.name && result.price===options.price)
          })
           if(result!=null && result.length>0){
             result[0].quantity++;
