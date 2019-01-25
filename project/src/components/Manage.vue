@@ -2,7 +2,54 @@
   <div class="manage">
     <div class="row">
       <div class="col-sm-12 col-md-8">
-        <newPizza></newPizza>
+        <form action="">
+          <h3 class="text-muted my-5">添加新的pizza</h3>
+          <div class="form-group row">
+            <label class="col-sm-1">品种</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" v-model="newPizza.name">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-1"> 描述</label>
+            <div class="col-sm-11">
+              <textarea name="" id="" rows="5" class="form-control" v-model="newPizza.description"></textarea>
+            </div>
+          </div>
+          <p><strong>选项一</strong></p>
+          <div class="form-group row">
+            <label class="col-sm-1">尺寸</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" v-model="newPizza.size1">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1">价格</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" v-model="newPizza.price1">
+            </div>
+          </div>
+
+          <p><strong>选项二</strong></p>
+          <div class="form-group row">
+            <label class="col-sm-1">尺寸</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" v-model="newPizza.size2">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1">价格</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" v-model="newPizza.price2">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <button type="button" @click="addNewPizza()" class="btn btn-success btn-block">添加</button>
+          </div>
+
+        </form>
       </div>
 
       <div class="col-sm-12 col-md-4">
@@ -15,11 +62,11 @@
           </tr>
           </thead>
 
-          <tbody class="table table-default">
+          <tbody class="table table-default" v-for="item in getMenuList" v-bind:key="item.name">
           <tr>
-            <td>榴莲pizza</td>
+            <td>{{item.name}}</td>
             <td>
-              <button class="btn btn-outline-danger btn-sm">
+              <button class="btn btn-outline-danger btn-sm" @click="deleteMenuList(item)">
                 &times;
                </button>
             </td>
@@ -34,13 +81,18 @@
 <script>
   //引入菜单管理组件
   import newPizza from './NewPizza'
-  export default {
+  import axios from 'axios'
+  export default{
     name: "manage",
-    data() {
-      return {}
+    data(){
+      return {
+        getMenuList: [],
+        newPizza: {},
+      }
     },
-    components:{
-      "newPizza":newPizza
+    created(){
+      //页面显示之前获取菜单列表数据
+      this.addMenuList();
     },
 //    //实现组件内的守卫
 //   beforeRouteEnter:(to, from, next)=> {
@@ -65,7 +117,76 @@
 //        next(false);
 //    }
 //   },
-    methods: {},
+    methods: {
+      //点击后发送新建的数据
+      addNewPizza() {
+        let data = {
+          name: this.newPizza.name,
+          size: this.newPizza.size,
+          description: this.newPizza.description,
+          options: [{
+            size: this.newPizza.size1,
+            price: this.newPizza.price1
+          }, {
+            size: this.newPizza.size2,
+            price: this.newPizza.price2
+          }]
+        };
+        //跨域传输数据axios,vue-resource,es6--fetch
+        /*fetch('https://wd4106509139npituc.wilddogio.com/menu.json', {
+          method: 'POST',
+          headers: {"Content-type": "application/x-www-form-urlencoded"},
+          body: JSON.stringify(data),
+        })
+          .then(res => {
+            return res.json();
+          })
+          .then(data => {
+            // this.$router.push({name:"menuLink"}
+          })
+          .catch(err => {
+            console.log(err);
+          })*/
+        //使用vue-axios实行数据请求
+        this.http.post("menu.json",data)
+          .then(res=>{
+            console.log(res);
+            if (res.status==200){
+              this.newPizza={};
+              this.addMenuList();
+            }else{
+              alert('添加失败');
+            }
+          })
+      },
+      //添加初始渲染菜单数据的方法
+       addMenuList(){
+         axios.get('/menu.json')
+           .then(res=>{
+             console.log(res.data);
+             let menuArray=[];
+             let data=res.data;
+             for(let key in data){
+               //添加后续可删除的绑定的id值
+               data[key].id=key;
+               menuArray.push(data[key]);
+             }
+             this.getMenuList=menuArray;
+           })
+       },
+      //添加删除菜单数据的方法
+      deleteMenuList(item){
+        fetch('https://wd4106509139npituc.wilddogio.com/menu/'+item.id+'.json',{
+          method:"DELETE",
+          headers:{"Content-type":"application/x-www-form-urlencoded"}
+        })
+          .then(res=>{
+            if (res.status==200){
+              this.addMenuList();
+            }
+          })
+      }
+    }
   };
 </script>
 

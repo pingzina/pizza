@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 axios.defaults.baseURL='https://wd4106509139npituc.wilddogio.com/'
+//配置vue原型请求路由,后面的单页不需要引入axios
+Vue.prototype.http=axios;
 
 Vue.config.productionTip = false
 //定义全局守卫==前置守卫

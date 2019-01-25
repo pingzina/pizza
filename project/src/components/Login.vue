@@ -40,7 +40,8 @@ import axios from "axios"
     },
     methods:{
      onSubmit:function(){
-     axios.get('/users.json').then(res=>{
+     axios.get('/users.json')
+       .then(res=>{
       console.log(res.data);
       const data=[];
       for (let key in res.data) {
