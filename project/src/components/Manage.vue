@@ -80,7 +80,6 @@
 </template>
 <script>
   //引入菜单管理组件
-  import newPizza from './NewPizza'
   import axios from 'axios'
   export default{
     name: "manage",
