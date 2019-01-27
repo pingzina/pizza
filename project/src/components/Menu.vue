@@ -11,7 +11,7 @@
             <th>加入</th>
           </tr>
           </thead>
-            <tbody v-for="item in getMenuList" :key="item.name">
+          <tbody v-for="item in getMenuList" :key="item.name">
           <tr>
             <td><strong>{{item.name}}</strong></td>
           </tr>
@@ -67,15 +67,23 @@
         //接收菜单数据列表：
         foodList: [],
         foodListText: "购物车暂时没有数据",
-        getMenuList: {}
+        // getMenuList: {}
       }
     },
     //获取菜单的数据
     created() {
       this.fetchData();
     },
-    //添加计算属性,return出去
+    //添加计算属性,
     computed: {
+      //添加数据的vuex,使用计算属性
+      getMenuList() {
+        //在vuex中获取数据,并且返回页面遍历渲染
+        // return this.$store.state.menuLists;
+        //通过vuex中的getters对象的方法调用数据。起到隐藏的作用
+        return this.$store.getters.getMenulist;
+      },
+      //计算菜单的总和
       total() {
         let totalCount = 0;
         for (let index in this.foodList) {
@@ -83,29 +91,34 @@
           totalCount += indexDivlist.quantity * indexDivlist.price;
         }
         return totalCount;
-      }
+      },
     },
     methods: {
       fetchData() {
-        fetch('https://wd4106509139npituc.wilddogio.com/menu.json', {})
+        // fetch('https://wd4106509139npituc.wilddogio.com/menu.json', {})
+        //   .then(res => {
+        //     return res.json();
+        //   })
+        //   .then(data => {
+        //     this.getMenuList = data;
+        //   })
+        /*this.http.get("menu.json")
+          .then(res=>{
+            // console.log(res.data);
+            this.getMenuList = res.data;
+          })*/
+        //将原型的请求下来的数据存储在vuex中
+        this.http.get("menu.json")
           .then(res => {
-            return res.json();
+            //使用状态存值，发送到vuex中的mutations中的方法里
+            this.$store.commit("setMenuLists", res.data);
           })
-          .then(data => {
-            this.getMenuList = data;
-          })
-       /*this.http.get("menu.json")
-         .then(res=>{
-           console.log(res.data);
-           this.getMenuList = res.data;
-         })*/
+
       },
       addtoMemulist(item, options) {
         //设置添加的数据
-        // console.log(item);
-        // console.log(options);
         let foodShow = {
-          name:item.name,
+          name: item.name,
           size: options.size,
           price: options.price,
           quantity: 1

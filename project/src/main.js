@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+//引入全局的vuex
+import {store} from './store/store'
+
 axios.defaults.baseURL='https://wd4106509139npituc.wilddogio.com/'
 //配置vue原型请求路由,后面的单页不需要引入axios
 Vue.prototype.http=axios;
@@ -33,6 +36,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

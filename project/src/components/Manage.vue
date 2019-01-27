@@ -68,7 +68,7 @@
             <td>
               <button class="btn btn-outline-danger btn-sm" @click="deleteMenuList(item)">
                 &times;
-               </button>
+              </button>
             </td>
           </tr>
           </tbody>
@@ -81,15 +81,16 @@
 <script>
   //引入菜单管理组件
   import axios from 'axios'
-  export default{
+
+  export default {
     name: "manage",
-    data(){
+    data() {
       return {
-        getMenuList: [],
+        // getMenuList: [],
         newPizza: {},
       }
     },
-    created(){
+    created() {
       //页面显示之前获取菜单列表数据
       this.addMenuList();
     },
@@ -116,6 +117,19 @@
 //        next(false);
 //    }
 //   },
+    computed: {
+      //在vuex中获取数据
+      getMenuList: {
+        get() {
+          // return this.$store.state.menuLists;
+          // 通过vuex中的getters方法获取数据，隐藏vuex中的具体保存数据的对象属性名
+          return this.$store.getters.getMenulist;
+        },
+        set() {
+        }
+      }
+
+    },
     methods: {
       //点击后发送新建的数据
       addNewPizza() {
@@ -147,41 +161,47 @@
             console.log(err);
           })*/
         //使用vue-axios实行数据请求
-        this.http.post("menu.json",data)
-          .then(res=>{
-            console.log(res);
-            if (res.status==200){
-              this.newPizza={};
-              this.addMenuList();
-            }else{
+        this.http.post("menu.json", data)
+          .then(res => {
+            //菜单的添加
+            //同步到vuex的菜单对象中，通过this.$store.commit(方法，数据)发送到vuex
+            this.$store.commit('pushMenulists',data);
+            if (res.status == 200) {
+              this.newPizza = {};
+              // this.addMenuList();
+            } else {
               alert('添加失败');
             }
           })
       },
       //添加初始渲染菜单数据的方法
-       addMenuList(){
-         axios.get('/menu.json')
-           .then(res=>{
-             console.log(res.data);
-             let menuArray=[];
-             let data=res.data;
-             for(let key in data){
-               //添加后续可删除的绑定的id值
-               data[key].id=key;
-               menuArray.push(data[key]);
-             }
-             this.getMenuList=menuArray;
-           })
-       },
+      addMenuList() {
+        axios.get('/menu.json')
+          .then(res => {
+            // console.log(res.data);
+            let menuArray = [];
+            let data = res.data;
+            for (let key in data) {
+              //添加后续可删除的绑定的id值
+              data[key].id = key;
+              menuArray.push(data[key]);
+            }
+            // this.getMenuList=menuArray;
+            //将新添加的数据发送到vuex中mutations中的方法里,从而实现数据的同步
+            this.$store.commit('setMenuLists', menuArray);
+          })
+      },
       //添加删除菜单数据的方法
-      deleteMenuList(item){
-        fetch('https://wd4106509139npituc.wilddogio.com/menu/'+item.id+'.json',{
-          method:"DELETE",
-          headers:{"Content-type":"application/x-www-form-urlencoded"}
+      deleteMenuList(item) {
+        fetch('https://wd4106509139npituc.wilddogio.com/menu/' + item.id + '.json', {
+          method: "DELETE",
+          headers: {"Content-type": "application/x-www-form-urlencoded"}
         })
-          .then(res=>{
-            if (res.status==200){
-              this.addMenuList();
+          .then(res => {
+            //将将要删除的数据同步到vuex中，并且发送给mutations中的方法中；
+            this.$store.commit('removeMenuItems',item);
+            if (res.status == 200) {
+              // this.addMenuList();
             }
           })
       }
