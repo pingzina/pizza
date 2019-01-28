@@ -8,11 +8,11 @@
          <!-- 添加数据一键提交 -->
          <form class="form-horizontal" @submit.prevent="onSubmit()">
          <div class="form-group">
-            <label for="email" class="control-label">邮箱：</label>
+            <label for="email" class="control-label" id="email">邮箱：</label>
                <input type="email" class="form-control"  placeholder="请输入你的邮箱账号" v-model="email">
          </div>
          <div class="form-group">
-            <label for="password" class="control-label">密码：</label>
+            <label for="password" class="control-label" id="password">密码：</label>
                <input type="password" class="form-control" placeholder="请输入你的密码" v-model="password">
          </div>
          <div class="form-group">
@@ -50,13 +50,19 @@ import axios from "axios"
       let result=data.filter((user)=>{
             return user.email==this.email && user.password==this.password
       })
+         //判断邮箱和密码是否为空
       //添加判断数组是不是为空
-      if(result!=null&&result.length>0){
-      //成功之后跳转到主页面
-      this.$router.push({name:'homeLink'});
-      }else{
-         alert("账号或者密码输入错误");
-      }
+         if ((this.email)&&(this.password)){
+           if(result!=null&&result.length>0){
+             //成功之后跳转到主页面
+             // this.$router.push({name:'homeLink'});
+           }else{
+             alert("账号或密码输入错误");
+           }
+         }else {
+           alert('邮箱和密码不能为空');
+           return;
+         }
      })
      }
     },

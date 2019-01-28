@@ -9,15 +9,15 @@
                <form class="form-horizontal" @submit.prevent="onSubmit()">
          <div class="form-group">
             <label for="email" class="control-label">邮箱：</label>
-               <input type="email" class="form-control"  placeholder="请输入你的邮箱账号" v-model="email">
+               <input type="email" class="form-control" id="email" placeholder="请输入你的邮箱账号" v-model="email">
          </div>
          <div class="form-group">
             <label for="password" class="control-label">密码：</label>
-               <input type="password" class="form-control" placeholder="请输入你的密码" v-model="password">
+               <input type="password" class="form-control" id="password" placeholder="请输入你的密码" v-model="password">
          </div>
          <div class="form-group">
             <label for="confirmPassword" class="control-label">确定密码：</label>
-               <input type="password" class="form-control"  placeholder="确定密码" v-model="confirmPassword">
+               <input type="password" class="form-control" id="confirmPassword" placeholder="确定密码" v-model="confirmPassword">
          </div>
          <div class="form-group">
                <button type="submit" class="btn btn-success btn-block">Regest</button>

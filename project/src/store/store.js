@@ -3,8 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex);
-//es6导出数据:
-export const store = new Vuex.Store({
+ const store = new Vuex.Store({
   state: {
     //设置属性
     menuLists: {},
@@ -42,6 +41,7 @@ export const store = new Vuex.Store({
   actions: {
     //应用mutations
   },
-
-
 })
+
+//es6导出数据:
+export {store};
