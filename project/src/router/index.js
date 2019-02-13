@@ -1,6 +1,8 @@
+//单独配置路由页面
+//引入相关的文件
 import Vue from 'vue'
 import Router from 'vue-router'
-import Resourse from 'vue-resource'
+
 //使用@符号快速引入组件模块
 import Home from '@/components/Home'
 import Menu from '@/components/Menu'
@@ -17,16 +19,14 @@ import Order from '@/components/about/Order'
 import PhoneNumber from '@/components/about/contact/PhoneNumber'
 import PersonName from '@/components/about/contact/PersonName'
 
-//使用路由和vue自带请求的页面
+//使用路由
 Vue.use(Router)
-Vue.use(Resourse)
-
-  //配置路由
-export default new Router({
-  //取消默认的路由#
+  //配置路由并且导出
+export let router=new Router({
+  //取消默认的路由#,路由的配置。默认hash模式
   // mode:"history",
   //配置滑动的行为，必须在跳转的页面才会执行
-  scrollBehavior(to,from,savedPosition){
+  /*scrollBehavior(to,from,savedPosition){
   //设置top值。
   //  return{x:0,y:100};
   //设置选择器，显示第一个的位置
@@ -37,7 +37,7 @@ export default new Router({
       }else{
         return{x:0,y:0};
       }
-  },
+  },*/
   routes:[
   {path:"/",name:"homeLink",components:{
   //实现路由的复用，相当于组件的复用

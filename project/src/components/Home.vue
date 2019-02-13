@@ -3,7 +3,7 @@
     <div class="background">
       <h1>欢迎大家品尝pizz!</h1>
       <h2>你想要的这里都有!</h2>
-      <button class="btn btn-success text-center" v-on:click="turn()">Let's go !</button>
+      <button class="btn btn-success text-center" @click="turn()">Let's go !</button>
     </div>
   </div>
 </template>

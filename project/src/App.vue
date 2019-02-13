@@ -22,19 +22,25 @@
           <router-view name="order"></router-view>
        </div>
        </div>
-
      </div>
+
+     <div class="container">
+      <app-footer></app-footer>
+    </div>
   </div>
 </template> 
 
 <script>
 // 注册组件头部
 import Header from './components/Header'
+//注册底部导航
+import FootBar from './components/FootBar'
 
 export default {
   name: 'App',
   components:{
-  "app-header":Header
+  "app-header":Header,
+  "app-footer":FootBar
   },
   data(){
     return{
