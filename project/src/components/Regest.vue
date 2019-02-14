@@ -51,7 +51,7 @@ import axios from "axios"
              password:this.password,
              confirmPassword:this.confirmPassword
           }
-          axios.post('/users.json',formdata).then(res=>{
+          this.axios.post('/apis/users.json',formdata).then(res=>{
             console.log(res);
             if(res.status==200){
                this.$router.push({name:'loginLink'});

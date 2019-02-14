@@ -27,7 +27,6 @@
 
 </template>
 <script>
-  import axios from "axios"
 
   export default {
     name: "login",
@@ -44,7 +43,7 @@
     },
     methods: {
       onSubmit: function () {
-        axios.get('/users.json')
+        this.axios.get('/apis/users.json')
           .then(res => {
             console.log(res.data);
             const data = [];

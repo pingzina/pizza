@@ -15,7 +15,7 @@
           <tr>
             <td><strong>{{item.name}}</strong></td>
           </tr>
-          <tr v-for="options in item.options" :key="options.size">
+          <tr v-for="(options,index) in item.options" :key="index">
             <td>{{options.size}}</td>
             <td>{{options.price}}</td>
             <td>
@@ -44,13 +44,13 @@
                 <span>{{thelist.quantity}}</span>
                 <button @click="increaseQuantity(thelist)" class="btn btn-light">+</button>
               </td>
-              <td>{{thelist.name}}{{thelist.size}}</td>
+              <td>{{thelist.name}}{{thelist.size}}寸</td>
               <td>{{thelist.price*thelist.quantity}}</td>
             </tr>
             </tbody>
           </table>
           <p>总价: <strong>{{total+'RMB'}}</strong></p>
-          <button class="btn btn-success btn-block">提交</button>
+          <button class="btn btn-success btn-block" @click="sendMenu()">提交</button>
         </div>
 
         <div v-else>{{foodListText}}</div>
@@ -108,11 +108,11 @@
             this.getMenuList = res.data;
           })*/
         //将原型的请求下来的数据存储在vuex中
-        this.http.get("menu.json")
+        this.axios.get("/apis/menu.json",{})
           .then(res => {
             //使用状态存值，发送到vuex中的mutations中的方法里
             this.$store.commit("setMenuLists", res.data);
-          })
+          })  
 
       },
       addtoMemulist(item, options) {
@@ -151,8 +151,11 @@
       //封装一个函数，作为购物车的展示与消失，调用时候只需要this.function.
       removeFormlist(thelist) {
         this.foodList.splice(this.foodList.indexOf(thelist), 1)
+      },
+      //获取添加的菜单
+      sendMenu(){
+      console.log(this.foodList);
       }
-      //购物车增加数据量
     },
   }
 </script>

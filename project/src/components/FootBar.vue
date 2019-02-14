@@ -20,7 +20,7 @@ export default {
 
 
 
-<style lang="" scoped>
+<style scoped>
    .footbar{
        position: fixed;
        left: 0;

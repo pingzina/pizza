@@ -21,8 +21,6 @@
           </ul>
      </nav>
      </header>
-     <!-- <p>this is father{{one}}</p> -->
-     <!-- <button v-on:click="changeValue()">点击获取数据</button> -->
 </div>
 </template> 
 
