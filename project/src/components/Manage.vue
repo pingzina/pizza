@@ -160,7 +160,7 @@ export default {
             console.log(err);
           })*/
       //使用vue-axios实行数据请求
-      this.axios.post("/apis/menu.json", data).then(res => {
+      this.axios.post("menu.json", data).then(res => {
         //菜单的添加
         //同步到vuex的菜单对象中，通过this.$store.commit(方法，数据)发送到vuex
         this.$store.commit("pushMenulists", data);
@@ -174,7 +174,7 @@ export default {
     },
     //添加初始渲染菜单数据的方法
     addMenuList() {
-      this.axios.get("/apis/menu.json").then(res => {
+      this.axios.get("menu.json").then(res => {
         // console.log(res.data);
         let menuArray = [];
         let data = res.data;
@@ -192,7 +192,7 @@ export default {
     deleteMenuList(item) {
       var truthBeTold = window.confirm("确定删除吗？");
       if (truthBeTold) {
-        fetch("/apis/menu/" + item.id + ".json", {
+        fetch(`menu/ + ${item.id} + .json`, {
         method: "DELETE",
         headers: { "Content-type": "application/x-www-form-urlencoded" }
       }).then(res => {

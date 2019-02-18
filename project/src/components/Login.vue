@@ -43,7 +43,7 @@
     },
     methods: {
       onSubmit: function () {
-        this.axios.get('/apis/users.json')
+        this.axios.get('users.json')
           .then(res => {
             console.log(res.data);
             const data = [];

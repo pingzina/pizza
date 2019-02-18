@@ -108,7 +108,7 @@
             this.getMenuList = res.data;
           })*/
         //将原型的请求下来的数据存储在vuex中
-        this.axios.get("/apis/menu.json",{})
+        this.axios.get("menu.json",{})
           .then(res => {
             //使用状态存值，发送到vuex中的mutations中的方法里
             this.$store.commit("setMenuLists", res.data);

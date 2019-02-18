@@ -31,7 +31,6 @@
     
 </template>
 <script>
-import axios from "axios"
     export default{
     name:"regest",
     data(){
@@ -51,7 +50,7 @@ import axios from "axios"
              password:this.password,
              confirmPassword:this.confirmPassword
           }
-          this.axios.post('/apis/users.json',formdata).then(res=>{
+          this.axios.post('users.json',formdata).then(res=>{
             console.log(res);
             if(res.status==200){
                this.$router.push({name:'loginLink'});

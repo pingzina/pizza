@@ -5,7 +5,7 @@ import axios from 'axios'
 //引入全局的vuex
 import {store} from './store/store'
 //设置axios请求的默认路径
-// axios.defaults.baseURL='https://wd4106509139npituc.wilddogio.com/'
+axios.defaults.baseURL='https://wd4106509139npituc.wilddogio.com/'
 
 //配置vue原型请求路由,后面的单页不需要引入axios
 Vue.prototype.axios=axios;
