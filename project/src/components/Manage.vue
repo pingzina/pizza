@@ -192,11 +192,10 @@ export default {
     deleteMenuList(item) {
       var truthBeTold = window.confirm("确定删除吗？");
       if (truthBeTold) {
-        fetch(`menu/ + ${item.id} + .json`, {
-        method: "DELETE",
-        headers: { "Content-type": "application/x-www-form-urlencoded" }
+        this.axios.delete(`menu/${item.id}.json`, {
       }).then(res => {
-        //将将要删除的数据同步到vuex中，并且发送给mutations中的方法中；
+        //将将要删除的数据同步到vuex中，并且发送给mutations中的方法中
+        // console.log(res);
         this.$store.commit("removeMenuItems", item);
         if (res.status == 200) {
           // this.addMenuList();

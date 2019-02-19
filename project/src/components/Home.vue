@@ -1,7 +1,7 @@
 <template>
   <div class="home col-sm-12 text-center">
     <div class="background">
-      <h1>欢迎大家品尝pizz!</h1>
+      <h1>欢迎大家品尝pizza!</h1>
       <h2>你想要的这里都有!</h2>
       <button class="btn btn-success text-center" @click="turn()">Let's go !</button>
     </div>

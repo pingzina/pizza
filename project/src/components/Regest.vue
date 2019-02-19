@@ -13,11 +13,11 @@
          </div>
          <div class="form-group">
             <label for="password" class="control-label">密码：</label>
-               <input type="password" class="form-control" id="password" placeholder="请输入你的密码" v-model="password">
+               <input type="new-password" class="form-control" id="password" placeholder="请输入你的密码" v-model="password">
          </div>
          <div class="form-group">
             <label for="confirmPassword" class="control-label">确定密码：</label>
-               <input type="password" class="form-control" id="confirmPassword" placeholder="确定密码" v-model="confirmPassword">
+               <input type="new-password" class="form-control" id="confirmPassword" placeholder="确定密码" v-model="confirmPassword">
          </div>
          <div class="form-group">
                <button type="submit" class="btn btn-success btn-block">Regest</button>
@@ -44,7 +44,10 @@
     },
     methods:{
      onSubmit:function(){
-         if(this.password==this.confirmPassword){
+        if((this.email=='')||(this.password=='')||(this.confirmPassword=='')){
+        alert('邮箱和密码不能为空');
+        return;
+        }else if(this.password==this.confirmPassword){
           const formdata={
              email:this.email,
              password:this.password,
@@ -53,9 +56,12 @@
           this.axios.post('users.json',formdata).then(res=>{
             console.log(res);
             if(res.status==200){
+               var turnLink=window.confirm('注册成功，是否登录？');
+               if(turnLink){
                this.$router.push({name:'loginLink'});
+               }
             }
-          });
+            })
          }else{
             alert("输入密码不一致");
          }
