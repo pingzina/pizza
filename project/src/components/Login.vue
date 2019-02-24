@@ -47,7 +47,7 @@ export default {
   methods: {
     onSubmit: function() {
       this.axios.get("users.json").then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         const data = [];
         for (let key in res.data) {
           data.push(res.data[key]);
@@ -63,7 +63,7 @@ export default {
             //数据发送到vuex状态管理中的action对象里面的方法
             this.$store.dispatch("setUser", result[0].email);
             //成功之后跳转到主页面
-            // this.$router.push({name:'homeLink'});
+            this.$router.push({name:'homeLink'});
           } else {
             alert("账号或密码输入错误");
           }
