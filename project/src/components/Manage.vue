@@ -129,9 +129,12 @@ export default {
   methods: {
     //点击后发送新建的数据
     addNewPizza() {
+      if((!this.newPizza.name)||(!this.newPizza.description)||(!this.newPizza.size1)||(!this.newPizza.price1)){
+      alert('请正确添加菜单');
+      return;
+      }else{
       let data = {
         name: this.newPizza.name,
-        size: this.newPizza.size,
         description: this.newPizza.description,
         options: [
           {
@@ -171,6 +174,7 @@ export default {
           alert("添加失败");
         }
       });
+      }
     },
     //添加初始渲染菜单数据的方法
     addMenuList() {

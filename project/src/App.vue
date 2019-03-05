@@ -48,6 +48,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less'>
+// @import './base/style/reset.less';
 </style>
