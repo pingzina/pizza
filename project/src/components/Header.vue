@@ -14,17 +14,19 @@
          </ul>
 
           <ul class="navbar-nav ml-auto">
-             <li><router-link  :to="{name:'loginLink'}" class="nav-link">登录</router-link></li>
-             <li><router-link  :to="{name:'regestLink'}" class="nav-link">注册</router-link></li>
-         </ul>
+             <li><router-link  :to="{name:'loginLink'}" class="nav-link" v-show="!isLogin">登录</router-link></li>
+             <li class="nav-link">{{currentUser}}</li>
+             <li><router-link  :to="{name:'regestLink'}" class="nav-link" v-show="!isLogin">注册</router-link></li>
+            <li><router-link  :to="{name:'loginLink'}" class="nav-link" v-show="isLogin">[退出]</router-link></li>
+          </ul>
      </nav>
      </header>
-     <!-- <p>this is father{{one}}</p> -->
-     <!-- <button v-on:click="changeValue()">点击获取数据</button> -->
 </div>
 </template> 
 
 <script>
+  //rout-link   默认是a标签，但是他不会刷新页面跳转，可以更改跳转的标签。是tag：
+  // 实现动态绑定路由，和以前的属性绑定没有什么区别,需要加属性绑定v-bind:to
     export default{
     name:"app-header",
     props:{
@@ -34,13 +36,22 @@
        },
        data(){
           return{
-    //rout-link   默认是a标签，但是他不会刷新页面跳转，可以更改跳转的标签。是tag：
-    // 实现动态绑定路由，和以前的属性绑定没有什么区别,需要加属性绑定v-bind:to
+
+
           }
        },
        methods:{
         
-       }
+       },
+      //添加计算属性，获取veu中的登录状态值来控制用户的登录
+      computed:{
+        isLogin(){
+          return this.$store.getters.isLogin
+        },
+        currentUser(){
+          return this.$store.getters.currentUser
+        }
+      }
        
     }
     

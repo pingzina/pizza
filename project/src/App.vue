@@ -22,8 +22,8 @@
           <router-view name="order"></router-view>
        </div>
        </div>
-
      </div>
+
   </div>
 </template> 
 
@@ -34,7 +34,7 @@ import Header from './components/Header'
 export default {
   name: 'App',
   components:{
-  "app-header":Header
+  "app-header":Header,
   },
   data(){
     return{
@@ -48,6 +48,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='less'>
+// @import './base/style/reset.less';
 </style>

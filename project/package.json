@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "pizza",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "pingzina <1241860821@qq.com>",
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",

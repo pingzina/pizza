@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="512053f0-8782-4fe0-8b7b-935ae652d56c" name="pizza" url="http://pingzia.com/">
+        <fileTransfer host="pingzia.ftp-gz01.bcehost.com" port="8010" rootFolder="/webroot">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="8010" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
