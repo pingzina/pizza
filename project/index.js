@@ -1,6 +1,14 @@
 const express=require("express");
 const app=express();
 const mysql=require("mysql");
+// app.all('*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+//     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+//     res.header("X-Powered-By",' 3.2.1')
+//     // if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+//     // else  next();
+// });
 
 app.get("/",(req,res)=>{
     console.log(req.query);
@@ -10,10 +18,11 @@ app.get("/",(req,res)=>{
     })
 })
 
-app.post('login',(req,res)=>{
+app.post('/login',(req,res)=>{
     console.log(req.body);
     res.end({
-        code:200
+        code:200,
+        body:req.body
     })
 })
 
@@ -57,6 +66,6 @@ app.listen(port,err=>{
     if(err){
         console.log(err);
     }else{
-        console.log('your application is running:'+`localhost://${port}`)
+        console.log('your application is running:'+`http://localhost:${port}`)
     }
 })

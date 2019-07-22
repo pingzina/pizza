@@ -46,8 +46,11 @@ export default {
   },
   methods: {
     onSubmit: function() {
-      this.axios.get("users.json").then(res => {
-        // console.log(res.data);
+      this.$http({
+        method: 'get',
+        url:'localhost:2000', 
+      }).then(res => {
+        console.log(res);
         const data = [];
         for (let key in res.data) {
           data.push(res.data[key]);

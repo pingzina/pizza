@@ -6,33 +6,28 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/apis': {
-         // 接口域名
-        target: 'https://wd4106509139npituc.wilddogio.com/', 
-         //是否跨域
-        changeOrigin: true, 
-        //需要rewrite重写的,
-        pathRewrite: {
-          '^/apis': ''   
+      '/apis':{
+        //测试环境
+        target:'http://localhost:2000',
+        changeOrigin:true,
+        pathRewrite:{
+           '^/apis':''
         }
       }
-
     },
-
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-
+    
     /**
      * Source Maps
      */
@@ -55,7 +50,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
+
     /**
      * Source Maps
      */

@@ -4,13 +4,11 @@ import {router} from './router/index'
 import axios from 'axios'
 //引入全局的vuex
 import {store} from './store/store'
-//设置axios请求的默认路径
-axios.defaults.baseURL='https://wd4106509139npituc.wilddogio.com/'
-
 //配置vue原型请求路由,后面的单页不需要引入axios
-Vue.prototype.axios=axios;
+Vue.prototype.$http=axios;
 
 Vue.config.productionTip = false
+// console.log(axios.defaults)
 // 定义全局守卫==前置守卫
 // router.beforeEach((to,form,next)=>{
 //   //to:即将进入的目标，路由对象
