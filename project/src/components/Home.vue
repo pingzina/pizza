@@ -36,7 +36,7 @@ export default {
 .home {
   background: url(../../src/assets/pizza.jpg);
   background-size: cover;
-  height: 85vh;
+  height: 45vh;
   padding: 10%;
 }
 h1,
