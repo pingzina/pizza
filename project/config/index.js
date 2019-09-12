@@ -12,7 +12,7 @@ module.exports = {
     proxyTable: {
       '/apis':{
         //测试环境
-        target:'http://localhost:2000',
+        target:'http://localhost:2000/',
         changeOrigin:true,
         pathRewrite:{
            '^/apis':''

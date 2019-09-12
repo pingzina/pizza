@@ -21,8 +21,8 @@ import PersonName from '@/components/about/contact/PersonName'
 
 //使用路由
 Vue.use(Router)
-  //配置路由并且导出
-export let router=new Router({
+//配置路由并且导出
+export let router = new Router({
   //取消默认的路由#,路由的配置。默认hash模式
   // mode:"history",
   //配置滑动的行为，必须在跳转的页面才会执行
@@ -38,37 +38,84 @@ export let router=new Router({
         return{x:0,y:0};
       }
   },*/
-  routes:[
-  {path:"/",name:"homeLink",components:{
-  //实现路由的复用，相当于组件的复用
-           default:Home,
-          'history':History,
-          'express':Express,
-          'order':Order
-  }
-  },
-  {path:"/menu",name:"menuLink",component:Menu},
-  {path:"/about",name:"aboutLink",redirect:"/about/history",component:About,
-  children:[
-  {path:'/about/history',name:'historyLink',component:History},
-  {path:'/about/contact',name:'contactLink',redirect:"/about/contact/personname",component:Contact,
-   children:
-   [{path:'/about/contact/phonenumber',name:'phonenumber',component:PhoneNumber},
-   {path:'/about/contact/personname',name:'personname',component:PersonName}
-  ]
-  },
-  {path:'/about/express',name:'expressLink',component:Express},
-  {path:'/about/order',name:'orderLink',component:Order},
-  ]},
-  {path:"/login",name:"loginLink",component:Login},
-  {path:"/regest",name:"regestLink",component:Regest},
-{path:"/manage",name:"manageLink",component:Manage
-  // ,beforeEnter:((to, from, next) => {
-  //                   //路由独享的守卫
-  //                   alert('非登录状态下，不能管理');
-  //                   next();
-  // })
-},
-  {path:"*",redirect:"/"}
+  routes: [{
+      path: "/",
+      name: "homeLink",
+      components: {
+        //实现路由的复用，相当于组件的复用
+        default: Home,
+        'history': History,
+        'express': Express,
+        'order': Order
+      }
+    },
+    {
+      path: "/menu",
+      name: "menuLink",
+      component: Menu
+    },
+    {
+      path: "/about",
+      name: "aboutLink",
+      redirect: "/about/history",
+      component: About,
+      children: [{
+          path: '/about/history',
+          name: 'historyLink',
+          component: History
+        },
+        {
+          path: '/about/contact',
+          name: 'contactLink',
+          redirect: "/about/contact/personname",
+          component: Contact,
+          children: [{
+              path: '/about/contact/phonenumber',
+              name: 'phonenumber',
+              component: PhoneNumber
+            },
+            {
+              path: '/about/contact/personname',
+              name: 'personname',
+              component: PersonName
+            }
+          ]
+        },
+        {
+          path: '/about/express',
+          name: 'expressLink',
+          component: Express
+        },
+        {
+          path: '/about/order',
+          name: 'orderLink',
+          component: Order
+        },
+      ]
+    },
+    {
+      path: "/login",
+      name: "loginLink",
+      component: Login
+    },
+    {
+      path: "/regest",
+      name: "regestLink",
+      component: Regest
+    },
+    {
+      path: "/manage",
+      name: "manageLink",
+      component: Manage
+      // ,beforeEnter:((to, from, next) => {
+      //                   //路由独享的守卫
+      //                   alert('非登录状态下，不能管理');
+      //                   next();
+      // })
+    },
+    {
+      path: "*",
+      redirect: "/"
+    }
   ]
 })

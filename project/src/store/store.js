@@ -15,7 +15,9 @@ Vue.use(Vuex);
     //存储用户信息的对象
     currentUser:null,
     //存储用户的登录状态的对象
-    isLogin:false
+    isLogin:false,
+    //存储用户信息
+    userInfo:{}
   },
   getters,
   mutations,

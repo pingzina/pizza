@@ -1,3 +1,5 @@
+import { userInfo } from "os";
+
 //改变属性的状态
 //接收来自页面的传值
 const setMenuLists = (state, data) => {
@@ -30,6 +32,16 @@ const userStatus = (state, user) => {
     state.isLogin = false;
   }
 }
+//保存登录的信息
+const setUserInfo=(state,userInfo)=>{
+  console.log(userInfo);
+  state.userInfo=userInfo;
+  console.log(state.userInfo);
+}
 
+const clearUserInfo=(state)=>{
+  state.userInfo={};
+  console.log(state.userInfo);
+}
 
-export {setMenuLists,removeMenuItems,pushMenulists,userStatus};
+export {setMenuLists,removeMenuItems,pushMenulists,userStatus,setUserInfo,clearUserInfo};
